@@ -1,6 +1,6 @@
 package com.gpt.dumpgpt.shared;
 
-import com.gpt.dumpgpt.task.Task;
+import com.gpt.dumpgpt.task.TaskManager;
 
 public final class ProgramConstants {
     public static final String BOT_NAME = "DumbGPT";
@@ -41,10 +41,11 @@ public final class ProgramConstants {
     }
 
     public static void greet() {
+        TaskManager taskManager = new TaskManager();
         printWrapped(new String[]{
                 String.format("Hello I'm %s", ProgramConstants.BOT_NAME),
                 "What can I do for you?",
-                String.format("You currently have %d tasks!", Task.getTasks().size())
+                String.format("You currently have %d tasks!", taskManager.getTasks().size())
         });
     }
 

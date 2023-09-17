@@ -6,7 +6,7 @@ import com.gpt.dumpgpt.command.Command;
 import com.gpt.dumpgpt.shared.ApplicationState;
 import com.gpt.dumpgpt.shared.DukeException;
 import com.gpt.dumpgpt.shared.ProgramConstants;
-import com.gpt.dumpgpt.task.Task;
+import com.gpt.dumpgpt.task.TaskManager;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -22,7 +22,8 @@ public class Duke {
 
     private static void restoreTasksSafely() {
         try {
-            Task.restoreTasks();
+            TaskManager taskManager = new TaskManager();
+            taskManager.restoreTasks();
         } catch (Exception e) {
             ProgramConstants.printWrapped("Failed to restore old tasks...");
         }
@@ -30,7 +31,8 @@ public class Duke {
 
     private static void saveTasksSafely() {
         try {
-            Task.saveTasks();
+            TaskManager taskManager = new TaskManager();
+            taskManager.saveTasks();
         } catch (IOException e) {
             ProgramConstants.printWrapped("Failed to save tasks...");
         } catch (DukeException e) {

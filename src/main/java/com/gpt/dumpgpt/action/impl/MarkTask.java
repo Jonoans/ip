@@ -5,6 +5,7 @@ import com.gpt.dumpgpt.command.Command;
 import com.gpt.dumpgpt.shared.DukeException;
 import com.gpt.dumpgpt.shared.ProgramConstants;
 import com.gpt.dumpgpt.task.Task;
+import com.gpt.dumpgpt.task.TaskManager;
 
 public class MarkTask extends Action {
     private static final String ACTION_VERB = "mark";
@@ -32,7 +33,8 @@ public class MarkTask extends Action {
     }
 
     protected void execute() throws DukeException {
-        Task task = Task.getTask(getCommand());
+        TaskManager taskManager = new TaskManager();
+        Task task = taskManager.getTask(getCommand());
         throwIfInvalidTask(PRINT_ACTION, task);
         task.markDone();
         printSuccess(PRINT_ACTION, task);

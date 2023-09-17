@@ -7,6 +7,7 @@ import com.gpt.dumpgpt.shared.ProgramConstants;
 import com.gpt.dumpgpt.task.Deadline;
 import com.gpt.dumpgpt.task.Event;
 import com.gpt.dumpgpt.task.Task;
+import com.gpt.dumpgpt.task.TaskManager;
 import com.gpt.dumpgpt.task.Todo;
 
 public class AddTask extends Action {
@@ -25,10 +26,11 @@ public class AddTask extends Action {
     }
 
     protected void execute() throws DukeException {
+        TaskManager taskManager = new TaskManager();
         Task task = createNewTask();
         throwIfInvalidTask(task);
-        Task.addTask(task);
-        printSuccess(task);
+        taskManager.addTask(task);
+        printSuccess(taskManager, task);
     }
 
     private static void throwIfInvalidTask(Task task) throws DukeException {
@@ -51,8 +53,8 @@ public class AddTask extends Action {
         return null;
     }
 
-    private void printSuccess(Task task) {
-        int tasksCount = Task.getTasks().size();
+    private void printSuccess(TaskManager taskManager, Task task) {
+        int tasksCount = taskManager.getTasks().size();
         String taskSummary = String.format(
                 "You now have %d %s in the list!",
                 tasksCount,
