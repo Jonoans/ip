@@ -15,7 +15,7 @@ public class MarkTask extends Action {
         super(command, ACTION_VERB);
     }
 
-    public MarkTask(Command command, String verb) {
+    protected MarkTask(Command command, String verb) {
         super(command, verb);
     }
 

@@ -1,7 +1,12 @@
 package com.gpt.dumpgpt;
 
 import com.gpt.dumpgpt.action.api.ActionRegistry;
-import com.gpt.dumpgpt.action.impl.*;
+import com.gpt.dumpgpt.action.impl.AddTask;
+import com.gpt.dumpgpt.action.impl.DeleteTask;
+import com.gpt.dumpgpt.action.impl.EndProgram;
+import com.gpt.dumpgpt.action.impl.ListTask;
+import com.gpt.dumpgpt.action.impl.MarkTask;
+import com.gpt.dumpgpt.action.impl.UnmarkTask;
 import com.gpt.dumpgpt.command.Command;
 import com.gpt.dumpgpt.shared.ApplicationState;
 import com.gpt.dumpgpt.shared.DukeException;
