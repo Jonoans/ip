@@ -26,11 +26,11 @@ public class ActionRegistry {
         return actionRegistry;
     }
 
-    private boolean isActionVerbValid(String actionVerb) {
+    private boolean checkActionVerbValid(String actionVerb) {
         return !(actionVerb == null || actionVerb.isBlank());
     }
 
-    private boolean isAliasesValid(String[] aliases) {
+    private boolean checkAliasesValid(String[] aliases) {
         return !(aliases == null || aliases.length == 0);
     }
 
@@ -39,8 +39,8 @@ public class ActionRegistry {
         String actionVerb = action.getActionVerb();
         String[] aliases = action.getAliases();
 
-        boolean isVerbValid = isActionVerbValid(actionVerb),
-                isAliasesValid = isAliasesValid(aliases);
+        boolean isVerbValid = checkActionVerbValid(actionVerb),
+                isAliasesValid = checkAliasesValid(aliases);
 
         if (isVerbValid) {
             actionVerbs.add(actionVerb.strip());

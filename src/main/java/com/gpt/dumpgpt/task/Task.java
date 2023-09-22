@@ -3,7 +3,7 @@ package com.gpt.dumpgpt.task;
 import com.gpt.dumpgpt.shared.DukeException;
 import com.gpt.dumpgpt.shared.Serializer;
 
-import java.io.*;
+import java.io.IOException;
 
 public class Task {
     protected String type;

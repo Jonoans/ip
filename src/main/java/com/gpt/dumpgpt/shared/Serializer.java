@@ -1,6 +1,9 @@
 package com.gpt.dumpgpt.shared;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -102,7 +105,7 @@ public class Serializer {
         return (char) markerByte;
     }
 
-    private boolean isCorrectMarkerByte(char marker) throws IOException {
+    private boolean verifyMarkerByte(char marker) throws IOException {
         inputStream.mark(0);
         char markerByte = readMarkerByte();
         if (markerByte != marker) {
@@ -121,7 +124,7 @@ public class Serializer {
     }
 
     private byte[] readMarkedByteField(char marker) throws IOException {
-        if (!isCorrectMarkerByte(marker)) {
+        if (!verifyMarkerByte(marker)) {
             return null;
         }
         return readByteField();
@@ -169,7 +172,7 @@ public class Serializer {
         checkCanDeserialize();
         checkHasFieldsLeft();
 
-        if (!isCorrectMarkerByte(BOOL_MARKER)) {
+        if (!verifyMarkerByte(BOOL_MARKER)) {
             return null;
         }
 
@@ -186,7 +189,7 @@ public class Serializer {
         checkCanDeserialize();
         checkHasFieldsLeft();
 
-        if (!isCorrectMarkerByte(INT_MARKER)) {
+        if (!verifyMarkerByte(INT_MARKER)) {
             return null;
         }
 
