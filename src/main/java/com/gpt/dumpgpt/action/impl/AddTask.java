@@ -58,6 +58,13 @@ public class AddTask extends Action {
         return null;
     }
 
+    /**
+     * Prints a standard success message
+     * @param prompt string that will be printed as the before
+     *               the standard task summary lines
+     * @param taskManager instance of TaskManager
+     * @param task the task that was operated upon
+     */
     protected void printSuccess(String prompt, TaskManager taskManager, Task task) {
         int tasksCount = taskManager.getTasks().size();
         String taskSummary = String.format(

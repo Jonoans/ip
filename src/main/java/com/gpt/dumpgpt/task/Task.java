@@ -39,7 +39,7 @@ public class Task {
 
     protected Serializer serialize() throws DukeException {
         Serializer serializer = new Serializer();
-        serializer.assignType(type);
+        serializer.setType(type);
         serializer.putBoolean(isDone);
         serializer.putString(name);
         return serializer;

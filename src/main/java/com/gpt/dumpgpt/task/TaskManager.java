@@ -126,7 +126,7 @@ public class TaskManager {
             }
 
             Serializer serializer = new Serializer();
-            serializer.assignType(STATE_KEY);
+            serializer.setType(STATE_KEY);
             serializer.putInt(tasks.size());
             serializer.putBytes(tasksBytes.toByteArray());
             serializer.writeObject(outputStream);

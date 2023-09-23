@@ -19,12 +19,23 @@ public class MarkTask extends Action {
         super(command, verb);
     }
 
+    /**
+     * Ensures task is non-null
+     * @param action string denoting the action type to be printed in error message
+     * @param task the task object to be checked
+     * @throws DukeException exception thrown if task is null
+     */
     protected void throwIfInvalidTask(String action, Task task) throws DukeException {
         if (task == null) {
             throw new DukeException(String.format("Failed to mark task as %s...", action));
         }
     }
 
+    /**
+     * Prints standard success message for task marking
+     * @param action string denoting the action type to be printed in success message
+     * @param task the task object that was operated upon
+     */
     protected void printSuccess(String action, Task task) {
         ProgramConstants.printWrapped(new String[]{
                 String.format("Nice I've marked this task as %s:", action),

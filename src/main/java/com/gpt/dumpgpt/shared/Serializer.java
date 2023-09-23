@@ -9,22 +9,32 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class Serializer {
-    final static char OBJ_MARKER = 'O';
-    final static char STR_MARKER = 'S';
-    final static char BOOL_MARKER = 'B';
-    final static char INT_MARKER = 'I';
-    final static char BYTES_MARKER = 'R';
+    private final static char OBJ_MARKER = 'O';
+    private final static char STR_MARKER = 'S';
+    private final static char BOOL_MARKER = 'B';
+    private final static char INT_MARKER = 'I';
+    private final static char BYTES_MARKER = 'R';
 
     private String objectType = null;
     private int totalFields;
     private ByteArrayOutputStream outputStream = null;
     private InputStream inputStream = null;
 
+    /**
+     * Instantiates Serializer object
+     * meant for writing
+     */
     public Serializer() {
         totalFields = 0;
         outputStream = new ByteArrayOutputStream();
     }
 
+    /**
+     * Instantiates Serializer object
+     * meant for reading
+     *
+     * @param inputStream stream to read from
+     */
     public Serializer(InputStream inputStream) {
         totalFields = -1;
         this.inputStream = inputStream;
@@ -38,7 +48,7 @@ public class Serializer {
         return ByteBuffer.wrap(value).getInt();
     }
 
-    public void assignType(String objectType) {
+    public void setType(String objectType) {
         this.objectType = objectType;
     }
 
@@ -97,7 +107,7 @@ public class Serializer {
         }
     }
 
-    public Character readMarkerByte() throws IOException {
+    private Character readMarkerByte() throws IOException {
         int markerByte = inputStream.read();
         if (markerByte == -1) {
             return null;
@@ -107,8 +117,8 @@ public class Serializer {
 
     private boolean verifyMarkerByte(char marker) throws IOException {
         inputStream.mark(0);
-        char markerByte = readMarkerByte();
-        if (markerByte != marker) {
+        Character markerByte = readMarkerByte();
+        if (markerByte == null || markerByte != marker) {
             if (inputStream.markSupported()) {
                 inputStream.reset();
             }
@@ -146,7 +156,7 @@ public class Serializer {
         if (objectTypeBytes == null) {
             throw new DukeException("Failed to read object info...");
         }
-        assignType(new String(objectTypeBytes));
+        setType(new String(objectTypeBytes));
 
         byte[] fieldCount = inputStream.readNBytes(4);
         totalFields = bytesToInt(fieldCount);

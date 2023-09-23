@@ -6,6 +6,7 @@ import com.gpt.dumpgpt.task.Task;
 import com.gpt.dumpgpt.task.TaskManager;
 
 public class DeleteTask extends AddTask {
+    private static final String INVALID_TASK_ERROR_MESSAGE = "Invalid task number provided for deletion...";
     private static final String SUCCESS_PROMPT = "I've deleted the following task:";
     private static final String ACTION_VERB = "delete";
 
@@ -31,9 +32,14 @@ public class DeleteTask extends AddTask {
         throw new DukeException("Failed to delete task...");
     }
 
+    /**
+     * Ensure task is non-null
+     * @param task the task object to be checked
+     * @throws DukeException exception with error message
+     */
     private static void throwIfInvalidTask(Task task) throws DukeException {
         if (task == null) {
-            throw new DukeException("Invalid task number provided for deletion...");
+            throw new DukeException(INVALID_TASK_ERROR_MESSAGE);
         }
     }
 }
